@@ -1,0 +1,33 @@
+<br>
+<div class="container">
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Sender</th>
+      <th scope="col" style="width: 50%">Link</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody *ngIf="(bidsList$ | async)?.length>0; else emptyMsg">
+    <tr *ngFor="let bid of bidsList$ | async; let i = index">
+      <th scope="row">{{i + 1}}</th>
+      <td>@{{bid.sender}}</td>
+      <td>{{bid.permlink}}</td>
+      <td>{{bid.amount}} {{bid.currency}}</td>
+      <td>
+        <a class="btn btn-outline-primary" [href]="'https://busy.org'+bid.url" target="_blank">Busy <i class="fas fa-external-link-alt"></i></a>
+        <a class="btn btn-primary btn_steemit" [href]="'https://steemit.com'+bid.url" target="_blank">Steemit <i class="fas fa-external-link-alt"></i></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div><b>* This list refreshes every 60 seconds.</b></div>
+</div>
+<ng-template #emptyMsg>
+  <tr>
+    <td colspan="5">There are no comments in current queue.</td>
+  </tr>
+</ng-template>
+

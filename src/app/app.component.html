@@ -1,11 +1,16 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div class="container">
-  <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Github username" [(ngModel)]="username"
-           aria-label="Github username" aria-describedby="basic-addon2">
-    <div class="input-group-append">
-      <button class="btn btn-outline-secondary" type="button" routerLink="/user/{{username}}">Get Profile</button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <img src="../assets/images/curator_logo.png" height="45px">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="#" routerLink="/commentCuration" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">Comments Curation</a>
     </div>
   </div>
+</nav>
+<div class="container">
   <router-outlet></router-outlet>
 </div>

@@ -1,21 +1,16 @@
 import {UserProfile} from '../models/profile.model';
 import {ProfileActions, ProfileActionTypes} from '../actions/profile.actions';
 
-export const initialState: UserProfile = {
-  login: null,
-  avatar_url: null,
-  html_url: null
-};
-
-export function reducer(state = initialState, action: ProfileActions): UserProfile {
+export function reducer(state, action: ProfileActions): UserProfile {
   switch (action.type) {
     case ProfileActionTypes.RetrieveUserProfile: {
-      return  state;
+      return  { ...state, loading: true };
     }
     case ProfileActionTypes.RetrieveUserProfileSuccess: {
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        loading: false
       };
     }
     default: {

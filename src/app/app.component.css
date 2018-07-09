@@ -1,0 +1,7 @@
+#navbarNavAltMarkup {
+  margin-left: 2rem;
+}
+.nav-link.active {
+  border-bottom: 5px solid #fff;
+  margin-bottom: -9px;
+}

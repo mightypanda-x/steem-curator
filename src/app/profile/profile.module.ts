@@ -4,7 +4,6 @@ import {reducers} from './reducers';
 import {EffectsModule} from '@ngrx/effects';
 import {ProfileEffects} from './effects/profile.effects';
 import {ProfileService} from './services/profile.service';
-import {UserProfileComponent} from '../user-profile/user-profile.component';
 
 @NgModule()
 export class ProfileModule {
@@ -21,6 +20,6 @@ export class ProfileModule {
     StoreModule.forFeature('user', reducers),
     EffectsModule.forFeature([ProfileEffects])
   ],
-  declarations: [UserProfileComponent]
+  declarations: []
 })
 export class RootProfileModule {}

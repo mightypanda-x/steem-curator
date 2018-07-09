@@ -9,10 +9,17 @@ import {reducers, metaReducers} from './reducers';
 import {EffectsModule} from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import {UserProfileComponent} from './user-profile/user-profile.component';
+import {BotModule} from './bot/bot.module';
+import { CommentCurationComponent } from './comment-curation/comment-curation.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UserProfileComponent,
+    CommentCurationComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +35,8 @@ import {FormsModule} from '@angular/forms';
      */
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([]),
-    ProfileModule.forRoot()
+    ProfileModule.forRoot(),
+    BotModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
