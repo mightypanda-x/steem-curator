@@ -20,7 +20,7 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/assets",
-              "src/assets/images/favicon.ico"
+              "src/favicon.ico"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
@@ -78,7 +78,7 @@
             "scripts": [],
             "assets": [
               "src/assets",
-              "src/assets/images/favicon.ico"
+              "src/favicon.ico"
             ]
           }
         },
