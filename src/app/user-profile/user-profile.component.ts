@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {ProfileState} from '../profile/reducers';
 import {Store} from '@ngrx/store';
 import * as ProfileActions from '../profile/actions/profile.actions';
-import * as BotActions from '../bot/actions/bot.actions';
 import {Observable} from 'rxjs';
 import {UserProfile} from '../profile/models/profile.model';
 import {ActivatedRoute} from '@angular/router';
 import * as _ from 'lodash';
-import {BotState} from '../bot/reducers';
 
 @Component({
   selector: 'app-user-profile',
