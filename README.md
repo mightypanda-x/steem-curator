@@ -18,10 +18,10 @@ npm install
 ng serve
 ```
 #### Roadmap
-Comments Curation module
-Post Curation module
-SteemConnect integration for voting from within the app
-Potential curation rewards calculation
+- Comments Curation module
+- Post Curation module
+- SteemConnect integration for voting from within the app
+- Potential curation rewards calculation
 
 #### Version 1
 
