@@ -7,7 +7,7 @@ export const initialState: BidModel[] = [];
 
 export function reducer(state = initialState, action: BotActions): BidModel[] {
   switch (action.type) {
-    case BotActionTypes.RetriveBotInformationSuccess: {
+    case BotActionTypes.RetrieveBotInformationSuccess: {
       return [
         ...state,
         ...action.payload
@@ -22,7 +22,10 @@ export function reducer(state = initialState, action: BotActions): BidModel[] {
   }
 }
 
+// Retrieve list from state
 export const getBidsList = (state: BotState) => _.get(state, 'list', '');
+
+// Filter comments from all the current bids.
 export const getCommentBids = (bidList: BidModel[]) => {
   const commentList = _.map(bidList, (list) => {
     if (list.url.indexOf('#') >= 0) {
