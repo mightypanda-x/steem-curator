@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ProfileModule} from './profile/profile.module';
 import {StoreModule} from '@ngrx/store';
 import {reducers, metaReducers} from './reducers';
@@ -26,6 +27,7 @@ import { HomePageComponent } from './home-page/home-page.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgbModule.forRoot(),
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
      * function or object map of reducer functions. If passed an object of

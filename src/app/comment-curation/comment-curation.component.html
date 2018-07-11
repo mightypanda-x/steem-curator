@@ -5,7 +5,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Sender</th>
-      <th scope="col" style="width: 45%">Link</th>
+      <th scope="col">Link</th>
       <th scope="col">Amount</th>
       <th scope="col">Action</th>
     </tr>
@@ -16,7 +16,7 @@
       <td>@{{bid.sender}}</td>
       <td>{{bid.permlink}}</td>
       <td>{{bid.amount}} {{bid.currency}}</td>
-      <td>
+      <td class="actionBtn">
         <a class="btn btn-outline-primary" [href]="'https://busy.org'+bid.url" target="_blank">Busy <i class="fas fa-external-link-alt"></i></a>
         <a class="btn btn-primary btn_steemit" [href]="'https://steemit.com'+bid.url" target="_blank">Steemit <i class="fas fa-external-link-alt"></i></a>
       </td>

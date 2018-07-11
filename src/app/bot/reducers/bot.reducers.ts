@@ -9,7 +9,6 @@ export function reducer(state = initialState, action: BotActions): BidModel[] {
   switch (action.type) {
     case BotActionTypes.RetrieveBotInformationSuccess: {
       return [
-        ...state,
         ...action.payload
       ];
     }
