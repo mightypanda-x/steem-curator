@@ -7,6 +7,8 @@ import {
 import {catchError, map, flatMap} from 'rxjs/internal/operators';
 import {BotState} from '../reducers';
 import {Store} from '@ngrx/store';
+import * as _ from 'lodash';
+import {BidListModel} from '../models/bidList.model';
 
 @Injectable()
 export class BotEffects {
@@ -19,7 +21,11 @@ export class BotEffects {
     flatMap((action: RetrieveBotInformation) => this.botService.retrieveCurrentVotes(action.payload)
     .pipe(
       catchError(error => this.botService.handleError(error)),
-      map((bidInfo: any) => new RetrieveBotInformationSuccess(bidInfo.current_round))
+      map(
+        (bidList: BidListModel[]) => new RetrieveBotInformationSuccess(
+          _.flatMap(bidList, (bid: BidListModel) => bid.current_round)
+        )
+      )
     ))
   );
 

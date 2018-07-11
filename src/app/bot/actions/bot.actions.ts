@@ -14,7 +14,7 @@ export enum BotActionTypes {
 export class RetrieveBotInformation implements Action {
   readonly type = BotActionTypes.RetrieveBotInformation;
 
-  constructor(public payload: string) {}
+  constructor(public payload: string[]) {}
 }
 
 /*

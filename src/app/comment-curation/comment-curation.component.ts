@@ -3,7 +3,6 @@ import * as BotActions from '../bot/actions/bot.actions';
 import {BotState} from '../bot/reducers';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import * as _ from 'lodash';
 import * as fromBidsSelectors from '../bot/selectors';
 import fontawesome from '@fortawesome/fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/fontawesome-free-solid';
@@ -29,25 +28,18 @@ export class CommentCurationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     fontawesome.library.add(faExternalLinkAlt);
     // Dispatching action to get current bids when the page loads.
-    this.dispatchCommentActions();
+    this.store.dispatch(new BotActions.RetrieveBotInformation(this.commentBotList));
     // Running the calls in a loop to update bids list.
     this.commentCallInterval = setInterval(() => {
-      this.store.dispatch(new BotActions.ClearBotInformation());
-      setTimeout(this.dispatchCommentActions(), 100);
+      // this.store.dispatch(new BotActions.ClearBotInformation());
+      setTimeout(
+        this.store.dispatch(new BotActions.RetrieveBotInformation(this.commentBotList))
+        , 100);
     }, 60000);
   }
 
   ngOnDestroy() {
     clearInterval(this.commentCallInterval);
-  }
-
-  /*
-  * This method dispatches one call for each bot.
-   */
-  dispatchCommentActions = () => {
-    _.forEach(this.commentBotList, (botName) => {
-      this.store.dispatch(new BotActions.RetrieveBotInformation(botName));
-    });
   }
 
 }
