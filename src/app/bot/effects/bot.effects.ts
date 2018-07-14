@@ -23,7 +23,7 @@ export class BotEffects {
       catchError(error => this.botService.handleError(error)),
       map(
         (bidList: BidListModel[]) => new RetrieveBotInformationSuccess(
-          _.flatMap(bidList, (bid: BidListModel) => bid.current_round)
+          _.flatMap(bidList, (bid: BidListModel) => _.get(bid, 'current_round', []))
         )
       )
     ))

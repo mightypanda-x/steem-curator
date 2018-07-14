@@ -17,6 +17,7 @@ export class BotService {
   * It will return an observable of BidModel Array
   * */
   public retrieveCurrentVotes(botNames: string[]): Observable<BidListModel[]> {
+    // forkJoin will make call with all the bot names and join all the results into one array before returning.
     return forkJoin(
       _.map(botNames, (botName) => {
       return this.http

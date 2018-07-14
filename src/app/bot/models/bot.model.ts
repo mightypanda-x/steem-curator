@@ -1,5 +1,5 @@
 export interface BotModel {
   name: string;
-  comments: string;
+  comments: boolean;
   vote_usd: number;
 }
