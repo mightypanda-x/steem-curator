@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {BotService} from '../services/bot.service';
 import {
-  BotActionTypes, RetrieveBotInformation, RetrieveBotInformationSuccess
+  BotActionTypes, RetrieveBotInformation, RetrieveBotInformationSuccess, RetrieveBotList, RetrieveBotListSuccess
 } from '../actions/bot.actions';
-import {catchError, map, flatMap} from 'rxjs/internal/operators';
+import {catchError, map, flatMap, switchMap} from 'rxjs/internal/operators';
 import {BotState} from '../reducers';
 import {Store} from '@ngrx/store';
 import * as _ from 'lodash';
@@ -23,10 +23,23 @@ export class BotEffects {
       catchError(error => this.botService.handleError(error)),
       map(
         (bidList: BidListModel[]) => new RetrieveBotInformationSuccess(
-          _.flatMap(bidList, (bid: BidListModel) => bid.current_round)
+          _.flatMap(bidList, (bid: BidListModel) => _.get(bid, 'current_round', []))
         )
       )
     ))
+  );
+
+  /*
+  * This effect intercepts RetrieveBotList action and calls the service to get list of bid bots.
+   */
+  @Effect()
+  getBotsList = this.actions.pipe(
+    ofType(BotActionTypes.RetrieveBotList),
+    switchMap((action: RetrieveBotList) => this.botService.retrieveBotsList()
+      .pipe(
+        catchError(error => this.botService.handleError(error)),
+        map((botList: any) => new RetrieveBotListSuccess(botList))
+      ))
   );
 
   constructor(

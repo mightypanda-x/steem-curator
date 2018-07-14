@@ -1,12 +1,12 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import {BotState} from '../reducers';
-import * as fromBot from '../reducers/bot.reducers';
+import {createFeatureSelector, createSelector} from '@ngrx/store';
+import {BotsListState} from '../reducers';
+import * as fromBot from '../reducers/botList.reducers';
 
-export const selectBids = createFeatureSelector<BotState>('bids');
+export const selectBots = createFeatureSelector<BotsListState>('bots');
 
-export const getBidsList = createSelector(
-  selectBids,
-  fromBot.getBidsList
+export const getBotsList = createSelector(
+  selectBots,
+  fromBot.getBotsList
 );
 
-export const getCommentBids = createSelector(getBidsList, fromBot.getCommentBids);
+export const getCommentSupportingBots = createSelector(getBotsList, fromBot.getCommentBots);

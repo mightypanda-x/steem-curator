@@ -1,11 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import * as BotActions from '../bot/actions/bot.actions';
-import {BotState} from '../bot/reducers';
+import {BotsListState, BotState} from '../bot/reducers';
 import {select, Store} from '@ngrx/store';
-import {Observable} from 'rxjs';
-import * as fromBidsSelectors from '../bot/selectors';
+import {interval, Observable} from 'rxjs';
+import * as fromSelectors from '../bot/selectors';
 import fontawesome from '@fortawesome/fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/fontawesome-free-solid';
+import {takeWhile} from 'rxjs/internal/operators';
+import {BidModel} from '../bot/models/bid.model';
 
 @Component({
   selector: 'app-comment-curation',
@@ -15,31 +17,35 @@ import { faExternalLinkAlt } from '@fortawesome/fontawesome-free-solid';
 export class CommentCurationComponent implements OnInit, OnDestroy {
 
   commentBotList: string[];
-  bidsList$: Observable<any>;
-  commentCallInterval: any;
+  bidsList$: Observable<BidModel[]>;
+  botsList$: Observable<string[]>;
+  isAlive = true;
 
-  constructor(private store: Store<BotState>) {
-    // List of the bots that are currently being tracked. This will eventually either come from a config file or an api.
-    this.commentBotList = ['oceanwhale', 'estabond', 'edensgarden', 'emperorofnaps', 'whalecreator', 'minnowvotes', 'thebot', 'siditech',
-     'brandonfrye', 'dolphinbot', 'brupvoter', 'ubot', 'profitbot', 'lrd', 'a-bot', 'booster'];
-    this.bidsList$ = store.pipe(select(fromBidsSelectors.getCommentBids));
+  constructor(private store: Store<BotState | BotsListState>) {
+    this.bidsList$ = store.pipe(select(fromSelectors.getCommentBids));
+    this.botsList$ = store.pipe(select(fromSelectors.getCommentSupportingBots));
   }
 
   ngOnInit() {
+    // First get a list of bots that upvote comment and then get the bids on those bots.
+    this.botsList$.pipe(takeWhile(() => this.isAlive)).subscribe((commentBots) => {
+      this.commentBotList = commentBots;
+      // Dispatching action to get current bids when the page loads.
+      this.store.dispatch(new BotActions.RetrieveBotInformation(this.commentBotList));
+    });
     fontawesome.library.add(faExternalLinkAlt);
-    // Dispatching action to get current bids when the page loads.
-    this.store.dispatch(new BotActions.RetrieveBotInformation(this.commentBotList));
+    this.store.dispatch(new BotActions.RetrieveBotList());
+
     // Running the calls in a loop to update bids list.
-    this.commentCallInterval = setInterval(() => {
-      // this.store.dispatch(new BotActions.ClearBotInformation());
-      setTimeout(
-        this.store.dispatch(new BotActions.RetrieveBotInformation(this.commentBotList))
-        , 100);
-    }, 60000);
+    const fireInterval = interval(60000);
+    fireInterval.pipe(takeWhile(() => this.isAlive)).subscribe(() => {
+      this.store.dispatch(new BotActions.RetrieveBotInformation(this.commentBotList));
+    });
   }
 
   ngOnDestroy() {
-    clearInterval(this.commentCallInterval);
+    // All the observables that we are subscribing to need to get unsubscribed before we exit controller to prevent memory leak
+    this.isAlive = false;
   }
 
 }
