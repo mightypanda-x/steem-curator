@@ -1,6 +1,6 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {StoreModule} from '@ngrx/store';
-import {reducers} from './reducers';
+import {reducers, botsReducers} from './reducers';
 import {EffectsModule} from '@ngrx/effects';
 import {BotEffects} from './effects/bot.effects';
 import {BotService} from './services/bot.service';
@@ -17,6 +17,7 @@ export class BotModule {
 
 @NgModule({
   imports: [
+    StoreModule.forFeature('bots', botsReducers),
     StoreModule.forFeature('bids', reducers),
     EffectsModule.forFeature([BotEffects])
   ],

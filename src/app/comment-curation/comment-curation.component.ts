@@ -1,11 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import * as BotActions from '../bot/actions/bot.actions';
-import {BotState} from '../bot/reducers';
+import {BotsListState, BotState} from '../bot/reducers';
 import {select, Store} from '@ngrx/store';
-import {Observable} from 'rxjs';
+import {interval, Observable} from 'rxjs';
 import * as fromBidsSelectors from '../bot/selectors';
 import fontawesome from '@fortawesome/fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/fontawesome-free-solid';
+import {takeWhile} from 'rxjs/internal/operators';
 
 @Component({
   selector: 'app-comment-curation',
@@ -16,9 +17,9 @@ export class CommentCurationComponent implements OnInit, OnDestroy {
 
   commentBotList: string[];
   bidsList$: Observable<any>;
-  commentCallInterval: any;
+  isAlive = true;
 
-  constructor(private store: Store<BotState>) {
+  constructor(private store: Store<BotState | BotsListState>) {
     // List of the bots that are currently being tracked. This will eventually either come from a config file or an api.
     this.commentBotList = ['oceanwhale', 'estabond', 'edensgarden', 'emperorofnaps', 'whalecreator', 'minnowvotes', 'thebot', 'siditech',
      'brandonfrye', 'dolphinbot', 'brupvoter', 'ubot', 'profitbot', 'lrd', 'a-bot', 'booster'];
@@ -27,19 +28,18 @@ export class CommentCurationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     fontawesome.library.add(faExternalLinkAlt);
+    this.store.dispatch(new BotActions.RetrieveBotList());
     // Dispatching action to get current bids when the page loads.
     this.store.dispatch(new BotActions.RetrieveBotInformation(this.commentBotList));
     // Running the calls in a loop to update bids list.
-    this.commentCallInterval = setInterval(() => {
-      // this.store.dispatch(new BotActions.ClearBotInformation());
-      setTimeout(
-        this.store.dispatch(new BotActions.RetrieveBotInformation(this.commentBotList))
-        , 100);
-    }, 60000);
+    const fireInterval = interval(60000);
+    fireInterval.pipe(takeWhile(() => this.isAlive)).subscribe(() => {
+      this.store.dispatch(new BotActions.RetrieveBotInformation(this.commentBotList));
+    });
   }
 
   ngOnDestroy() {
-    clearInterval(this.commentCallInterval);
+    this.isAlive = false;
   }
 
 }

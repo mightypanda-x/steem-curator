@@ -13,7 +13,7 @@
     <tbody *ngIf="(bidsList$ | async)?.length>0; else emptyMsg">
     <tr *ngFor="let bid of bidsList$ | async; let i = index">
       <th scope="row">{{i + 1}}</th>
-      <td>@{{bid.sender}}</td>
+      <td><a [href]="'https://busy.org/@'+bid.sender" target="_blank">@{{bid.sender}}</a></td>
       <td>{{bid.permlink}}</td>
       <td>{{bid.amount}} {{bid.currency}}</td>
       <td class="actionBtn">
@@ -27,7 +27,7 @@
 </div>
 <ng-template #emptyMsg>
   <tr>
-    <td colspan="5">There are no comments in current queue.</td>
+    <td colspan="5">There are no comments in current up-vote queue.</td>
   </tr>
 </ng-template>
 
