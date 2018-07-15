@@ -23,6 +23,10 @@ export class PostService {
     });
     return [];
   }
+  /*
+  * This method gets post information using steem api and then promisefies the response.
+  * This is essential so we can make all the calls and then bundle that response using Promise.all
+  */
   private getPostInformation(author, permlink): Promise<any> {
     return new Promise((resolve, reject) => {
       steem.api.getContent(author, permlink, (err, postInformation) => {
