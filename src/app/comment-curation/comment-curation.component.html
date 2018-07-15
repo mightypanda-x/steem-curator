@@ -3,22 +3,24 @@
   <table class="table table-striped table-bordered">
     <thead class="thead-dark">
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Sender</th>
-      <th scope="col">Link</th>
-      <th scope="col">Amount</th>
+      <th scope="col">Post Text</th>
+      <th scope="col">Bid Amount</th>
+      <th scope="col">Current Votes</th>
+      <th scope="col">Total Payout</th>
       <th scope="col">Action</th>
     </tr>
     </thead>
-    <tbody *ngIf="(bidsList$ | async)?.length>0; else emptyMsg">
-    <tr *ngFor="let bid of bidsList$ | async; let i = index">
-      <th scope="row">{{i + 1}}</th>
-      <td><a [href]="'https://busy.org/@'+bid.sender" target="_blank">@{{bid.sender}}</a></td>
-      <td>{{bid.permlink}}</td>
-      <td>{{bid.amount}} {{bid.currency}}</td>
+    <tbody *ngIf="(postList$ | async)?.length>0; else emptyMsg">
+    <tr *ngFor="let post of postList$ | async;">
+      <td><a [href]="'https://busy.org/@'+post.sender" target="_blank">@{{post.sender}}</a></td>
+      <td>{{post.body}}</td>
+      <td>{{post.amount}} {{post.currency}}</td>
+      <td>{{post.net_votes}}</td>
+      <td>{{post.pending_payout_value}}</td>
       <td class="actionBtn">
-        <a class="btn btn-outline-primary" [href]="'https://busy.org'+bid.url" target="_blank">Busy <i class="fas fa-external-link-alt"></i></a>
-        <a class="btn btn-primary btn_steemit" [href]="'https://steemit.com'+bid.url" target="_blank">Steemit <i class="fas fa-external-link-alt"></i></a>
+        <a class="btn btn-outline-primary" [href]="'https://busy.org'+post.url" target="_blank">Busy <i class="fas fa-external-link-alt"></i></a>
+        <a class="btn btn-primary btn_steemit" [href]="'https://steemit.com'+post.url" target="_blank">Steemit <i class="fas fa-external-link-alt"></i></a>
       </td>
     </tr>
     </tbody>
