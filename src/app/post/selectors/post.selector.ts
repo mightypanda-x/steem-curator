@@ -10,6 +10,9 @@ export const getPostsList = createSelector(
   fromPost.getPostsList
 );
 
+/*
+* This code will combine posts list an comment list to genarate a merged object of the two.
+ */
 export const getPostsWithVotes = createSelector(
   getPostsList,
   getCommentBids,
