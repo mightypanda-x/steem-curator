@@ -14,6 +14,8 @@ import {UserProfileComponent} from './user-profile/user-profile.component';
 import {BotModule} from './bot/bot.module';
 import { CommentCurationComponent } from './comment-curation/comment-curation.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import {PostModule} from './post/post.module';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -36,9 +38,24 @@ import { HomePageComponent } from './home-page/home-page.component';
      * based application.
      */
     StoreModule.forRoot(reducers, { metaReducers }),
+    /**
+     * Store dev-tools instrument the store retaining past versions of state
+     * and recalculating new states. This enables powerful time-travel
+     * debugging.
+     *
+     * To use the debugger, install the Redux Devtools extension for either
+     * Chrome or Firefox
+     *
+     * See: https://github.com/zalmoxisus/redux-devtools-extension
+     */
+    StoreDevtoolsModule.instrument({
+      name: 'Steem Curator Store DevTools',
+      logOnly: false,
+    }),
     EffectsModule.forRoot([]),
     ProfileModule.forRoot(),
-    BotModule.forRoot()
+    BotModule.forRoot(),
+    PostModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

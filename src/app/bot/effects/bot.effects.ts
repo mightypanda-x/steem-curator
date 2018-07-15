@@ -5,8 +5,6 @@ import {
   BotActionTypes, RetrieveBotInformation, RetrieveBotInformationSuccess, RetrieveBotList, RetrieveBotListSuccess
 } from '../actions/bot.actions';
 import {catchError, map, flatMap, switchMap} from 'rxjs/internal/operators';
-import {BotState} from '../reducers';
-import {Store} from '@ngrx/store';
 import * as _ from 'lodash';
 import {BidListModel} from '../models/bidList.model';
 
@@ -44,7 +42,6 @@ export class BotEffects {
 
   constructor(
     private actions: Actions,
-    private store: Store<BotState>,
     private botService: BotService
   ) {}
 }
