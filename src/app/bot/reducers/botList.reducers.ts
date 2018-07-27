@@ -22,7 +22,7 @@ export const getBotsList = (state: BotsListState) => _.get(state, 'list', '');
 // Filter bots based on if they upvote comments and minimum vote value of 1.5 USD. This will eliminate smaller bots from the race.
 export const getCommentBots = (botList: BotModel[]) => {
   const commentBotList = _.map(botList, (list) => {
-    if (list.comments && list.vote_usd > 1.5) {
+    if (list.comments && list.vote_usd > 1) {
       return _.pick(list, ['name']);
     }
   });

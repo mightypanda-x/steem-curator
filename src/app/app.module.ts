@@ -16,6 +16,8 @@ import { CommentCurationComponent } from './comment-curation/comment-curation.co
 import { HomePageComponent } from './home-page/home-page.component';
 import {PostModule} from './post/post.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatSortModule, MatTableModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatSortModule,
+    MatTableModule,
     FormsModule,
     NgbModule.forRoot(),
     /**
