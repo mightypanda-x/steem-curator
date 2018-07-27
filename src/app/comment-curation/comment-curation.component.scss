@@ -1,0 +1,20 @@
+.btn_steemit {
+  margin-left: 10px;
+}
+.actionBtn {
+  white-space: nowrap;
+}
+.bidCol, .votesCol, .payoutCol {
+  /deep/ .mat-sort-header-container {
+    margin-right: 2rem;
+  }
+}
+.postBody {
+  padding: .5rem;
+}
+.comments {
+  width: 100%;
+  .mat-header-row {
+    background-color: #f7f7f7;
+  }
+}

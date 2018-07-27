@@ -1,29 +1,49 @@
 <br>
 <div class="container">
-  <table class="table table-striped table-bordered">
-    <thead class="thead-dark">
-    <tr>
-      <th scope="col">Sender</th>
-      <th scope="col">Post Text</th>
-      <th scope="col">Bid Amount</th>
-      <th scope="col">Current Votes</th>
-      <th scope="col">Total Payout</th>
-      <th scope="col">Action</th>
-    </tr>
-    </thead>
-    <tbody *ngIf="(postList$ | async)?.length>0; else emptyMsg">
-    <tr *ngFor="let post of postList$ | async;">
-      <td><a [href]="'https://busy.org/@'+post.sender" target="_blank">@{{post.sender}}</a></td>
-      <td>{{post.body}}</td>
-      <td>{{post.amount}} {{post.currency}}</td>
-      <td>{{post.net_votes}}</td>
-      <td>{{post.pending_payout_value}}</td>
-      <td class="actionBtn">
+
+  <table mat-table [dataSource]="dataSource" matSort class="comments">
+
+    <!-- Sender Column -->
+    <ng-container matColumnDef="sender">
+      <th mat-header-cell *matHeaderCellDef>Sender </th>
+      <td mat-cell *matCellDef="let post"><a [href]="'https://busy.org/@'+post.sender" target="_blank">@{{post.sender}}</a> </td>
+    </ng-container>
+
+    <!-- Post Column -->
+    <ng-container matColumnDef="body">
+      <th mat-header-cell *matHeaderCellDef>Post Text</th>
+      <td mat-cell *matCellDef="let post" class="postBody"> {{post.body}} </td>
+    </ng-container>
+
+    <!-- Amount Column -->
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="bidCol">Bid Amount </th>
+      <td mat-cell *matCellDef="let post"> {{post.amount}} {{post.currency}}</td>
+    </ng-container>
+
+    <!-- Current Votes Column -->
+    <ng-container matColumnDef="net_votes">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="votesCol">Current Votes </th>
+      <td mat-cell *matCellDef="let post"> {{post.net_votes}}</td>
+    </ng-container>
+
+    <!-- Current Payout Column -->
+    <ng-container matColumnDef="pending_payout_value">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="payoutCol">Current Payout </th>
+      <td mat-cell *matCellDef="let post"> {{post.pending_payout_value}}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container  matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions </th>
+      <td mat-cell *matCellDef="let post" style="white-space: nowrap">
         <a class="btn btn-outline-primary" [href]="'https://busy.org'+post.url" target="_blank">Busy <i class="fas fa-external-link-alt"></i></a>
         <a class="btn btn-primary btn_steemit" [href]="'https://steemit.com'+post.url" target="_blank">Steemit <i class="fas fa-external-link-alt"></i></a>
       </td>
-    </tr>
-    </tbody>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   <div><b>* This list refreshes every 60 seconds.</b></div><br>
   <div><b>Currently watching: </b>

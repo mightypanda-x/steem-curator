@@ -125,5 +125,10 @@
       }
     }
   },
-  "defaultProject": "steem-curator"
+  "defaultProject": "steem-curator",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
