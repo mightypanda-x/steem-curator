@@ -14,6 +14,10 @@
 }
 .comments {
   width: 100%;
+  border: 1px solid #ccc;
+  .postCol {
+    padding: .5rem;
+  }
   .mat-header-row {
     background-color: #f7f7f7;
   }

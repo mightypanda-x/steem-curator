@@ -27,7 +27,7 @@ export const getBidsList = (state: BotState) => _.get(state, 'list', '');
 // Filter comments from all the current bids.
 export const getCommentBids = (bidList: BidModel[]) => {
   const commentList = _.map(bidList, (list) => {
-    if (list.url.indexOf('#') >= 0) {
+    if (list.url.indexOf('#') >= -1) {
       return list;
     }
   });

@@ -18,13 +18,16 @@ import {PostModule} from './post/post.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSortModule, MatTableModule} from '@angular/material';
+import { UtopianPostsComponent } from './utopian-posts/utopian-posts.component';
+import {UtopianPostModule} from './utopian/utopian.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserProfileComponent,
     CommentCurationComponent,
-    HomePageComponent
+    HomePageComponent,
+    UtopianPostsComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,8 @@ import {MatSortModule, MatTableModule} from '@angular/material';
     EffectsModule.forRoot([]),
     ProfileModule.forRoot(),
     BotModule.forRoot(),
-    PostModule.forRoot()
+    PostModule.forRoot(),
+    UtopianPostModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
