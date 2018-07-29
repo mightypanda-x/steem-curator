@@ -22,9 +22,7 @@ export class RetrievePendingPosts implements Action {
 export class RetrievePendingPostsSuccess implements Action {
   readonly type = UtopianActionTypes.RetrievePendingPostsSuccess;
 
-  constructor(public payload: UtopianPostModel[]) {
-    console.log('**', payload);
-  }
+  constructor(public payload: UtopianPostModel[]) { }
 }
 
 export class RetrievePendingPostsFailure implements Action {

@@ -1,0 +1,10 @@
+.pendingPosts {
+  width: 100%;
+  border: 1px solid #ccc;
+  .mat-header-row {
+    background-color: #f7f7f7;
+  }
+  .mat-cell {
+    padding: .5rem;
+  }
+}

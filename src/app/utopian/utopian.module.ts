@@ -1,4 +1,4 @@
-import {reducers} from '../post/reducers';
+import {reducers} from './reducers';
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
@@ -17,7 +17,7 @@ export class UtopianPostModule {
 
 @NgModule({
   imports: [
-    StoreModule.forFeature('posts', reducers),
+    StoreModule.forFeature('utopian', reducers),
     EffectsModule.forFeature([UtopianEffects])
   ],
   declarations: []

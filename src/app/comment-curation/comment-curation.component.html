@@ -1,7 +1,7 @@
 <br>
 <div class="container">
 
-  <table mat-table [dataSource]="dataSource" matSort class="comments">
+  <table mat-table [dataSource]="dataSource" matSort class="comments" matSortActive="pending_payout_value" matSortDirection="asc">
 
     <!-- Sender Column -->
     <ng-container matColumnDef="sender">
@@ -45,6 +45,8 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  <div class="noRecordMsg" *ngIf="(postList$ | async)?.length===0"><b>No Record Found</b></div>
+  <br><br>
   <div><b>* This list refreshes every 60 seconds.</b></div><br>
   <div><b>Currently watching: </b>
     <span *ngFor="let bot of commentBotList; last as isLast">
