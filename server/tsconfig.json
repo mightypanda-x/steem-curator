@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "es6"
+    ],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "types": ["node", "express"],
+    "baseUrl": ".",
+    "removeComments": true,
+    "typeRoots": ["../node_modules/@types"],
+    "paths": {
+      "*": [
+        "types/*"
+      ]
+    }
+  }
+}
