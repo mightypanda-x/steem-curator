@@ -12,9 +12,15 @@ export class UtopianService {
   /*
   * This method will make a call to utopian service to get a list of pending posts.
   * */
-  public retrivePendingPosts(): Observable<UtopianPostModel[]> {
+  public retrievePendingPosts(): Observable<UtopianPostModel[]> {
     return this.http
       .get<any>(`${this.apiUrl}/pending`,
+        {responseType: 'json'});
+  }
+
+  public retrieveUnreviewedPosts(): Observable<UtopianPostModel[]> {
+    return this.http
+      .get<any>(`${this.apiUrl}/unreviewed`,
         {responseType: 'json'});
   }
   public handleError(error: HttpErrorResponse): Observable<UtopianPostModel> {

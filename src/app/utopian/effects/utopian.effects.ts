@@ -10,9 +10,18 @@ export class UtopianEffects {
   * This effect intercepts RetrieveBotInformation action and calls the service.
    */
   @Effect()
-  getPostDetails = this.actions.pipe(
+  getPendingPost = this.actions.pipe(
     ofType(UtopianActionTypes.RetrievePendingPosts),
-    switchMap((action: RetrievePendingPosts) => this.utopianService.retrivePendingPosts().pipe(
+    switchMap(() => this.utopianService.retrievePendingPosts().pipe(
+      catchError(error => this.utopianService.handleError(error)),
+      map((pendingPosts: any) => new RetrievePendingPostsSuccess(pendingPosts))
+    ))
+  );
+
+  @Effect()
+  getUnreviewedPost = this.actions.pipe(
+    ofType(UtopianActionTypes.RetrieveUnreviewedPosts),
+    switchMap(() => this.utopianService.retrieveUnreviewedPosts().pipe(
       catchError(error => this.utopianService.handleError(error)),
       map((pendingPosts: any) => new RetrievePendingPostsSuccess(pendingPosts))
     ))

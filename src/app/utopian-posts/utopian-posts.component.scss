@@ -1,10 +1,52 @@
 .pendingPosts {
   width: 100%;
   border: 1px solid #ccc;
+  border-left-width: 5px;
   .mat-header-row {
     background-color: #f7f7f7;
   }
   .mat-cell {
     padding: .5rem;
+  }
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btn-outline-primary {
+  &:hover {
+    background-color: #dee2e6;
+    color: #007bff;
+  }
+}
+tr {
+  border-left: 5px solid #cccccc;
+  &.bug-hunting {
+    border-left-color: red;
+  }
+  &.development {
+    border-left-color: black;
+  }
+  &.blog {
+    border-left-color: blue;
+  }
+  &.translations {
+    border-left-color: yellow;
+  }
+  &.copywriting {
+    border-left-color: #007f80;
+  }
+  &.tutorials {
+    border-left-color: #792a51;
+  }
+  &.graphics {
+    border-left-color: #f8a700;
+  }
+  &.task-analysis, &.analysis {
+    border-left-color: #174265;
+  }
+  &.ideas {
+    border-left-color: #4dd39f;
   }
 }

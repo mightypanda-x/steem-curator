@@ -45,7 +45,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <div class="noRecordMsg" *ngIf="(postList$ | async)?.length===0"><b>No Record Found</b></div>
+  <div class="noRecordMsg" *ngIf="(postList$ | async)?.length===0"><b>No Records Found</b></div>
   <br><br>
   <div><b>* This list refreshes every 60 seconds.</b></div><br>
   <div><b>Currently watching: </b>

@@ -15,25 +15,46 @@ import {MatSort, MatTableDataSource} from '@angular/material';
 export class UtopianPostsComponent implements OnInit, OnDestroy {
 
   isAlive = true;
+  pendingSelected = true;
+  filterText = '';
   pendingPost$: Observable<UtopianState>;
-  pendingPostsDS = new MatTableDataSource([]);
+  postsDS = new MatTableDataSource([]);
   @ViewChild(MatSort) sort: MatSort;
 
   displayedColumns: string[] = ['order', 'author', 'category', 'title', 'total_votes', 'total_payout'];
 
   constructor(private store: Store<UtopianState>) { }
 
+  applyFilter(filterValue: string) {
+    this.postsDS.filter = filterValue.trim().toLowerCase();
+  }
+
   ngOnInit() {
-    this.store.dispatch(new UtopianActions.RetrievePendingPosts());
+    this.getUnreviewedPosts();
 
     this.pendingPost$ = this.store.select('utopian');
     this.pendingPost$.pipe(takeWhile(() => this.isAlive)).subscribe((pendingPosts) => {
-      console.log('**', pendingPosts);
-      if (_.has(pendingPosts, 'pending')) {
-        this.pendingPostsDS = new MatTableDataSource(pendingPosts.pending);
-        this.pendingPostsDS.sort = this.sort;
+      if (_.has(pendingPosts, 'posts')) {
+        this.postsDS = new MatTableDataSource(pendingPosts.posts);
+        this.postsDS.sort = this.sort;
       }
-    })
+    });
+  }
+
+  getPendingPosts() {
+    if (!this.pendingSelected) {
+      this.filterText = '';
+      this.pendingSelected = true;
+      this.store.dispatch(new UtopianActions.RetrievePendingPosts());
+    }
+  }
+
+  getUnreviewedPosts() {
+    if (this.pendingSelected) {
+      this.filterText = '';
+      this.pendingSelected = false;
+      this.store.dispatch(new UtopianActions.RetrieveUnreviewedPosts());
+    }
   }
 
   ngOnDestroy() {

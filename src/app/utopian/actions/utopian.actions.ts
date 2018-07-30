@@ -3,6 +3,7 @@ import {UtopianPostModel} from '../models/utopian.model';
 
 export enum UtopianActionTypes {
   RetrievePendingPosts = '[Utopian] Retrieve Pending Posts',
+  RetrieveUnreviewedPosts = '[Utopian] Retrieve Unreviewed Posts',
   RetrievePendingPostsSuccess = '[Utopian] Retrieve Pending Posts Success',
   RetrievePendingPostsFailure = '[Utopian] Retrieve Pending Posts Failure'
 }
@@ -12,6 +13,12 @@ export enum UtopianActionTypes {
 */
 export class RetrievePendingPosts implements Action {
   readonly type = UtopianActionTypes.RetrievePendingPosts;
+
+  constructor() {}
+}
+
+export class RetrieveUnreviewedPosts implements Action {
+  readonly type = UtopianActionTypes.RetrieveUnreviewedPosts;
 
   constructor() {}
 }

@@ -17,7 +17,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import {PostModule} from './post/post.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatSortModule, MatTableModule} from '@angular/material';
+import {MatFormFieldModule, MatInputModule, MatSortModule, MatTableModule} from '@angular/material';
 import { UtopianPostsComponent } from './utopian-posts/utopian-posts.component';
 import {UtopianPostModule} from './utopian/utopian.module';
 
@@ -35,6 +35,8 @@ import {UtopianPostModule} from './utopian/utopian.module';
     HttpClientModule,
     BrowserAnimationsModule,
     MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatTableModule,
     FormsModule,
     NgbModule.forRoot(),
