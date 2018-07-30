@@ -7,13 +7,14 @@ import {RetrievePendingPostsFailure} from '../actions/utopian.actions';
 
 @Injectable()
 export class UtopianService {
+  private apiUrl = 'https://secure-temple-76878.herokuapp.com/api';
   constructor(private http: HttpClient, private store: Store<UtopianPostModel>) {}
   /*
   * This method will make a call to utopian service to get a list of pending posts.
   * */
   public retrivePendingPosts(): Observable<UtopianPostModel[]> {
     return this.http
-      .get<any>('/api/utopian/pending',
+      .get<any>(`${this.apiUrl}/pending`,
         {responseType: 'json'});
   }
   public handleError(error: HttpErrorResponse): Observable<UtopianPostModel> {
