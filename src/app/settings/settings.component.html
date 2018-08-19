@@ -1,0 +1,22 @@
+<br>
+<div class="container">
+  <h3 class="col-md-12">Settings</h3>
+  <br>
+  <div class="col-md-5 infoBox">
+    <h5>Username</h5>
+    <mat-form-field appearance="outline" class="full-size">
+      <input matInput placeholder="Username">
+      <mat-icon matSuffix>face</mat-icon>
+      <mat-hint>Setting username will open a slew of features in the application.</mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="col-md-5 infoBox">
+    <h5>Preferred Front end</h5>
+    <mat-radio-group class="fe-radio-group" [(ngModel)]="preferredFrontEnd">
+      <mat-radio-button class="fe-radio-button" *ngFor="let frontEnd of frontEnds" [value]="frontEnd">
+        {{frontEnd}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <button mat-raised-button color="primary">Save</button>
+</div>

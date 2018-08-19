@@ -7,4 +7,8 @@ export interface UtopianPostModel {
   total_payout: number;
   total_votes: number;
   url: string;
+  hasUpvoted: boolean;
+  loading: boolean;
+  error: boolean;
+  isAuthor: boolean;
 }

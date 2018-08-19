@@ -20,18 +20,17 @@
       <input matInput (keyup)="applyFilter($event.target.value)" [(ngModel)]="filterText" placeholder="Enter filter text here">
     </mat-form-field>
   </div>
-  <br>
   <table mat-table [dataSource]="postsDS" matSort class="pendingPosts">
 
     <!-- Post Index -->
     <ng-container matColumnDef="order">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header># </th>
-      <td mat-cell *matCellDef="let post;" class="text-center">{{postsDS.data.indexOf(post)+1}}</td>
+      <th mat-header-cell *matHeaderCellDef># </th>
+      <td mat-cell *matCellDef="let post" class="text-center">{{postsDS.data.indexOf(post)+1 | number}}</td>
     </ng-container>
     <!-- Author Column -->
     <ng-container matColumnDef="author">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Author </th>
-      <td mat-cell *matCellDef="let post"><a [href]="'https://busy.org/@'+post.sender" target="_blank">@{{post.author}}</a> </td>
+      <td mat-cell *matCellDef="let post"><a [href]="'https://steemit.com/@'+post.author" target="_blank">@{{post.author}}</a> </td>
     </ng-container>
 
     <!-- Category Column -->
@@ -59,16 +58,23 @@
     </ng-container>
 
     <!-- Actions Column -->
-    <!--<ng-container  matColumnDef="actions">
+    <ng-container  matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions </th>
-      <td mat-cell *matCellDef="let post" style="white-space: nowrap">
-        <a class="btn btn-outline-primary" [href]="'https://busy.org'+post.url" target="_blank">Busy <i class="fas fa-external-link-alt"></i></a>
-        <a class="btn btn-primary btn_steemit" [href]="'https://steemit.com'+post.url" target="_blank">Steemit <i class="fas fa-external-link-alt"></i></a>
+      <td mat-cell *matCellDef="let post">
+        <span *ngIf="post.loading">
+          <mat-spinner [diameter]="20"></mat-spinner>
+        </span>
+        <i class="material-icons hasError" *ngIf="post.error && !post.hasUpvoted">
+          error_outline
+        </i>
+        <i class="material-icons hasUpvoted" *ngIf="post.hasUpvoted">
+          check_circle_outline
+        </i>
       </td>
-    </ng-container>-->
+    </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="row.category"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="{{row.category}}" [ngClass]="{'isAuthor': row.isAuthor}"></tr>
   </table>
 </div>
 
