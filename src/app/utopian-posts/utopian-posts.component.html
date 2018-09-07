@@ -30,7 +30,7 @@
     <!-- Author Column -->
     <ng-container matColumnDef="author">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Author </th>
-      <td mat-cell *matCellDef="let post"><a [href]="'https://steemit.com/@'+post.author" target="_blank">@{{post.author}}</a> </td>
+      <td mat-cell *matCellDef="let post"><a [href]="'https://' + sitePreference+'/@'+post.author" target="_blank">@{{post.author}}</a> </td>
     </ng-container>
 
     <!-- Category Column -->
