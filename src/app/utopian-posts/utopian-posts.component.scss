@@ -49,4 +49,13 @@ tr {
   &.ideas {
     border-left-color: #4dd39f;
   }
+  &.isAuthor {
+    background-color: lightgoldenrodyellow;
+  }
+}
+.hasUpvoted {
+  color: green;
+}
+.hasError {
+  color: red;
 }

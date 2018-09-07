@@ -5,7 +5,6 @@ import {BidModel} from '../models/bid.model';
 import {Store} from '@ngrx/store';
 import {RetrieveBotInformationFailure} from '../actions/bot.actions';
 import * as _ from 'lodash';
-import * as steem from 'steem';
 import {BidListModel} from '../models/bidList.model';
 import {BotModel} from '../models/bot.model';
 
