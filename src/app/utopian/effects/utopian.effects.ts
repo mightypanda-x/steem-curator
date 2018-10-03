@@ -1,8 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {catchError, map, switchMap} from 'rxjs/internal/operators';
-import {RetrievePendingPosts, RetrievePendingPostsSuccess, UtopianActionTypes} from '../actions/utopian.actions';
+import {
+  RetrieveModCommentsSuccess,
+  RetrievePendingPostsSuccess,
+  UtopianActionTypes
+} from '../actions/utopian.actions';
 import {UtopianService} from '../services/utopian.service';
+import {UtopianCommentModel} from '../models/utopian.model';
 
 @Injectable()
 export class UtopianEffects {
@@ -24,6 +29,15 @@ export class UtopianEffects {
     switchMap(() => this.utopianService.retrieveUnreviewedPosts().pipe(
       catchError(error => this.utopianService.handleError(error)),
       map((pendingPosts: any) => new RetrievePendingPostsSuccess(pendingPosts))
+    ))
+  );
+
+  @Effect()
+  getModeratorComments = this.actions.pipe(
+    ofType(UtopianActionTypes.RetrieveModComments),
+    switchMap(() => this.utopianService.retrieveModeratorComments().pipe(
+      catchError(error => this.utopianService.handleError(error)),
+      map((modComments: UtopianCommentModel[]) => new RetrieveModCommentsSuccess(modComments))
     ))
   );
 

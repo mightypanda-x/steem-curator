@@ -12,3 +12,12 @@ export interface UtopianPostModel {
   error: boolean;
   isAuthor: boolean;
 }
+
+export interface UtopianCommentModel {
+  author: string;
+  permlink: string;
+  url: string;
+  loading: boolean;
+  total_payout: number;
+  total_votes: number;
+}

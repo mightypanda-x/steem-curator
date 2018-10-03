@@ -7,13 +7,13 @@ import * as steem from 'steem';
 import {BidModel} from '../../bot/models/bid.model';
 import {RetrievePostDetailsFailure} from '../actions/post.actions';
 import {PostModel} from '../models/post.model';
-import {UtopianPostModel} from '../../utopian/models/utopian.model';
+import {UtopianCommentModel, UtopianPostModel} from '../../utopian/models/utopian.model';
 
 @Injectable()
 export class PostService {
   constructor(private http: HttpClient, private store: Store<BidModel>) {}
 
-  public retrivePostsInfo(bids: BidModel[] | UtopianPostModel[], cb): Array<any> {
+  public retrivePostsInfo(bids: BidModel[] | UtopianPostModel[] | UtopianCommentModel[], cb): Array<any> {
     const methodCalls = [];
     _.map(bids, (bid) => {
       methodCalls.push(this.getPostInformation(bid.author, bid.permlink));

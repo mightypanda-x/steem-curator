@@ -21,7 +21,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   profileSettings$: Observable<ProfileSettingsModel>;
 
   constructor(private store: Store<ProfileState>) {
-    this.frontEnds = ['steemit.com', 'busy.org'];
+    this.frontEnds = ['steemit.com', 'busy.org', 'steemitstage.com'];
     this.profileSettings$ = store.pipe(select(profileSelectors.profileSettings));
   }
 
