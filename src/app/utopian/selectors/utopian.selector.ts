@@ -11,3 +11,13 @@ export const utopianPostsList = createSelector(selectPosts, fromUtopian.getUtopi
 export const utopianPosts = createSelector(utopianPostsList, sitePreferenece, fromUtopian.getUtopianPosts);
 
 export const utopianPostsWithVotes = createSelector(utopianPosts, getPostsList, profileUsername, fromUtopian.utopianPostsWithVoters);
+
+// Getting lost of comments
+export const utopianCommentsList = createSelector(selectPosts, fromUtopian.getUtopianCommentsList);
+
+// Adding site preferences for utopian
+export const utopianComments = createSelector(utopianCommentsList, sitePreferenece, fromUtopian.getUtopianComments);
+
+// User settings are used to update comments and add payout information
+export const utopianCommentsWithVoters =
+  createSelector(utopianComments, getPostsList, profileUsername, fromUtopian.utopianCommentsWithVoters);

@@ -1,0 +1,35 @@
+.modComments {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-left-width: 5px;
+  .mat-header-row {
+    background-color: #f7f7f7;
+  }
+  .mat-cell {
+    padding: .5rem;
+  }
+}
+.hasUpvoted {
+  color: green;
+}
+.hasError {
+  color: red;
+}
+.mat-column-actions {
+  width: 100px;
+  max-width: 100px;
+}
+.mat-column-total_payout {
+  width: 102px;
+  max-width: 102px;
+}
+th.mat-header-cell:first-child {
+  padding-left: 17px;
+}
+.mat-column-total_votes {
+  width: 50px;
+  max-width: 50px;
+}
+th.mat-header-cell {
+  padding-left: .5rem;
+}

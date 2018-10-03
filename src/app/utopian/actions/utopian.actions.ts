@@ -1,11 +1,14 @@
 import {Action} from '@ngrx/store';
-import {UtopianPostModel} from '../models/utopian.model';
+import {UtopianCommentModel, UtopianPostModel} from '../models/utopian.model';
 
 export enum UtopianActionTypes {
   RetrievePendingPosts = '[Utopian] Retrieve Pending Posts',
   RetrieveUnreviewedPosts = '[Utopian] Retrieve Unreviewed Posts',
   RetrievePendingPostsSuccess = '[Utopian] Retrieve Pending Posts Success',
-  RetrievePendingPostsFailure = '[Utopian] Retrieve Pending Posts Failure'
+  RetrievePendingPostsFailure = '[Utopian] Retrieve Pending Posts Failure',
+  RetrieveModComments = '[Utopian] Retrieve Moderator Comments',
+  RetrieveModCommentsSuccess = '[Utopian] Retrieve Moderator Comments Success',
+  RetrieveModCommentsFailure = '[Utopian] Retrieve Moderator Comments Failure',
 }
 
 /*
@@ -38,6 +41,27 @@ export class RetrievePendingPostsFailure implements Action {
   constructor(public payload: string) {}
 }
 
+export class RetrieveModComments implements Action {
+  readonly type = UtopianActionTypes.RetrieveModComments;
+
+  constructor() {}
+}
+
+export class RetrieveModCommentsSuccess implements Action {
+  readonly type = UtopianActionTypes.RetrieveModCommentsSuccess;
+
+  constructor(public payload: UtopianCommentModel[]) {}
+}
+
+export class RetrieveModCommentsFailure implements Action {
+  readonly type = UtopianActionTypes.RetrieveModCommentsFailure;
+
+  constructor() {}
+}
+
 export type UtopianActions = RetrievePendingPosts
   | RetrievePendingPostsSuccess
-  | RetrievePendingPostsFailure;
+  | RetrievePendingPostsFailure
+  | RetrieveModComments
+  | RetrieveModCommentsSuccess
+  | RetrieveModCommentsFailure;

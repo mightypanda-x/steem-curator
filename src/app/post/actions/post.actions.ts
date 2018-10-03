@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import {BidModel} from '../../bot/models/bid.model';
 import {PostModel} from '../models/post.model';
-import {UtopianPostModel} from '../../utopian/models/utopian.model';
+import {UtopianCommentModel, UtopianPostModel} from '../../utopian/models/utopian.model';
 
 export enum PostActionTypes {
   RetrievePostDetails = '[Post] Retrieve Details',
@@ -14,7 +14,7 @@ export enum PostActionTypes {
 export class RetrievePostDetails implements Action {
   readonly type = PostActionTypes.RetrievePostDetails;
 
-  constructor(public payload: BidModel[] | UtopianPostModel[]) {}
+  constructor(public payload: BidModel[] | UtopianPostModel[] | UtopianCommentModel[]) {}
 }
 /*
 * This action gets called when the retrieve of post data is successful.

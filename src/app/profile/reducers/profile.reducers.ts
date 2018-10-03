@@ -3,7 +3,6 @@ import {ProfileActions, ProfileActionTypes} from '../actions/profile.actions';
 import {ProfileSettingsModel} from '../models/profileSettings.model';
 import {ProfileState} from './index';
 import * as _ from 'lodash';
-import {profileSettings} from '../selectors';
 
 export function reducer(state, action: ProfileActions): UserProfile {
   switch (action.type) {
