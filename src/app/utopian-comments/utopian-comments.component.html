@@ -1,0 +1,57 @@
+<br>
+<table mat-table [dataSource]="commentsDS" matSort class="modComments">
+
+  <!-- Comment Index -->
+  <ng-container matColumnDef="order">
+    <th mat-header-cell *matHeaderCellDef># </th>
+    <td mat-cell *matCellDef="let comment" class="text-center">{{commentsDS.data.indexOf(comment)+1 | number}}</td>
+  </ng-container>
+  <!-- Author Column -->
+  <ng-container matColumnDef="author">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Author </th>
+    <td mat-cell *matCellDef="let comment"><a [href]="'https://' + sitePreference+'/@'+comment.author" target="_blank">@{{comment.author}}</a> </td>
+  </ng-container>
+
+  <!-- Permlink Column -->
+  <ng-container matColumnDef="permlink">
+    <th mat-header-cell *matHeaderCellDef class="permlinkCol">PermLink </th>
+    <td mat-cell *matCellDef="let comment"><a [href]="comment.url" target="_blank">{{comment.permlink}}</a> </td>
+  </ng-container>
+
+  <!-- Current Votes Column -->
+  <ng-container matColumnDef="total_votes">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header class="votesCol">Votes </th>
+    <td mat-cell *matCellDef="let comment"> {{comment.total_votes}}</td>
+  </ng-container>
+
+  <!-- Current Payout Column -->
+  <ng-container matColumnDef="total_payout">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header class="payoutCol">Current Payout </th>
+    <td mat-cell *matCellDef="let comment"> {{comment.total_payout}}</td>
+  </ng-container>
+
+  <!-- Current Payout Column -->
+  <ng-container matColumnDef="duration">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header class="durationCol">Duration </th>
+    <td mat-cell *matCellDef="let comment"> {{comment.duration}}</td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container  matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions </th>
+    <td mat-cell *matCellDef="let comment">
+        <span *ngIf="comment.loading">
+          <mat-spinner [diameter]="20"></mat-spinner>
+        </span>
+      <i class="material-icons hasError" *ngIf="comment.error && !comment.hasUpvoted">
+        error_outline
+      </i>
+      <i class="material-icons hasUpvoted" *ngIf="comment.hasUpvoted">
+        check_circle_outline
+      </i>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'isAuthor': row.isAuthor}"></tr>
+</table>
