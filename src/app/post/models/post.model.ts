@@ -5,4 +5,6 @@ export interface PostModel extends BidModel {
   pending_payout_value: string;
   permlink: string;
   body: string;
+  beneficiaries: any[];
+  active_votes: any[];
 }

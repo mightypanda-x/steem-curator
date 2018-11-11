@@ -29,6 +29,7 @@ import { UtopianPostsComponent } from './utopian-posts/utopian-posts.component';
 import {UtopianPostModule} from './utopian/utopian.module';
 import { SettingsComponent } from './settings/settings.component';
 import { UtopianCommentsComponent } from './utopian-comments/utopian-comments.component';
+import { OracleDPostsComponent } from './oracle-d-posts/oracle-d-posts.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { UtopianCommentsComponent } from './utopian-comments/utopian-comments.co
     HomePageComponent,
     UtopianPostsComponent,
     SettingsComponent,
-    UtopianCommentsComponent
+    UtopianCommentsComponent,
+    OracleDPostsComponent
   ],
   imports: [
     BrowserModule,
